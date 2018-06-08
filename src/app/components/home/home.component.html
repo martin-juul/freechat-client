@@ -1,0 +1,57 @@
+<!--<div class="top-bar">
+  <mat-toolbar>
+    <div class="cmt-btns">
+      <span>Channel: General</span>
+    </div>
+  </mat-toolbar>
+</div>-->
+<div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+
+  <mat-list *ngFor="let message of messages">
+    <mat-list-item class="chat-box">
+      <div class="chat-user">
+        <img matListAvatar *ngIf="message.action === undefined" [src]="message.from.avatar">
+
+        <div class="chat-user-info">
+          <h3 *ngIf="message.action === undefined">{{ message.from.name }}</h3>
+          <span>2 hours ago</span>
+        </div>
+
+      </div>
+      <p class="chat-message" *ngIf="message.action === undefined">{{ message.content }}</p>
+      <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
+        <span> <b>{{message.from.name}}</b> joined to the conversation. </span>
+      </p>
+
+
+      <p mat-line *ngIf="message.action === action.RENAME" class="chat-notification">
+        <span> <b>{{message.content.previousUsername}}</b> is now <b>{{message.content.username}}</b> </span>
+      </p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+
+  <div class="chat-message-editor">
+
+    <!--<div class="chat-message-toolbar">
+      <mat-toolbar color="primary">
+        <div class="cmt-btns">
+          <span>item</span>
+          <span>item</span>
+          <span>item</span>
+          <span>item</span>
+        </div>
+      </mat-toolbar>
+    </div>-->
+
+    <mat-form-field class="chat-message-input">
+      <textarea
+        matInput
+        placeholder="Write message"
+        [(ngModel)]="messageContent"
+        (keyup.enter)="sendMessage(messageContent)"></textarea>
+    </mat-form-field>
+
+  </div>
+
+</div>
