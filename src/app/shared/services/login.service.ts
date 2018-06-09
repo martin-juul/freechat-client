@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 
 const LOGIN_SERVER = 'http://localhost:3000/';
@@ -25,7 +26,7 @@ export class LoginService
     }, { observe: 'response' });
   }
 
-  public verifyToken(token: string) {
+  public verifyToken(userId: string, token: string) {
     return this.http.post<User>(LOGIN_SERVER + 'user/verify-token', {
       token: token
     }, { observe: 'response' });

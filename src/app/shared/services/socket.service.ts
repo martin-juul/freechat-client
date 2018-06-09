@@ -5,14 +5,14 @@ import { Message } from '../models/message.model';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event.model';
 
-const SERVER_URL = 'http://localhost:8080';
+//import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SocketService {
   private socket;
 
   public initSocket(): void {
-    this.socket = socketIo(SERVER_URL);
+    this.socket = socketIo('http://localhost:8080');
   }
 
   public send(message: Message): void {
