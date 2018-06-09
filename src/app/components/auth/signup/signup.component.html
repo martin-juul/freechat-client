@@ -1,0 +1,43 @@
+<div class="container">
+
+  <mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <form #loginForm="ngForm"
+          (ngSubmit)="onSubmit(loginForm.value)"
+          class="login-form">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="username"
+          placeholder="username"
+          minlength="3"
+          required
+          [(ngModel)]="credentials.username">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          name="password"
+          type="password"
+          placeholder="password"
+          minlength="6"
+          required
+          [(ngModel)]="credentials.password">
+      </mat-form-field>
+
+      <div>
+        <button
+          mat-raised-button="primary"
+          type="submit"
+          [disabled]="!loginForm.form.valid">Sign Up</button>
+        <button
+          mat-raised-button="accent"
+          type="button"
+          routerLink="/auth/signin">Go to Login</button>
+      </div>
+    </form>
+  </mat-card>
+
+</div>
