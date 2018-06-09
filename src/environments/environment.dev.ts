@@ -5,5 +5,8 @@
 
 export const CONF_DEV = {
   production: false,
-  environment: 'DEV'
+  environment: 'DEV',
+  origin: 'http://localhost:3000',
+  serviceBaseUrl: this.origin + '/',
+  messageServiceBaseUrl: 'http://localhost:8080'
 };
