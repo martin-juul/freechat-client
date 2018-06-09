@@ -1,6 +1,15 @@
-export interface User {
+export interface User
+{
   id?: string;
-  name?: string;
+  username?: string;
+  password?: string;
   avatar?: string;
   email?: string;
+  token?: AuthToken
+}
+
+export interface AuthToken
+{
+  token: string;
+  createdAt: Date;
 }
