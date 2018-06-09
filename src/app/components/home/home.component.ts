@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SocketService } from '../../shared/services/socket.service';
 
 import { Action } from '../../shared/models/action.model';
@@ -7,34 +7,41 @@ import { Event } from '../../shared/models/event.model';
 import { Message } from '../../shared/models/message.model';
 import { LoginService } from '../../shared/services/login.service';
 import { Subscription } from 'rxjs';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: [ './home.component.scss' ]
 })
-export class HomeComponent implements OnInit
+export class HomeComponent implements OnInit, OnDestroy
 {
   action = Action;
   user: User;
   messages: Message[] = [];
   messageContent: string;
   ioConnection: any;
+  connectedClients: User[] = [];
 
   subscription: Subscription;
 
   constructor(private socketService: SocketService,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
-    this.initUser();
     this.initIoConnection();
-    console.log(this.user);
 
-    this.subscription = this.loginService.login('test2', 'martin123').subscribe(user => {
-      console.log(user);
-    });
+    this.user = this.userService.getUser();
+    this.connectedClients.push(this.user);
+    this.sendNotification(Action.JOINED);
+
+    console.log(this.user);
+  }
+
+  ngOnDestroy() {
+    this.connectedClients = [];
   }
 
   public sendMessage(message: string): void {
@@ -44,44 +51,34 @@ export class HomeComponent implements OnInit
 
     this.socketService.send({
       from: this.user,
-      content: message
+      content: message,
+      time: new Date()
     });
 
     this.messageContent = null;
   }
 
-  public sendNotification(params: any, action: Action): void {
+  public sendNotification(action: Action, params?: any): void {
     let message: Message;
 
     if (action === Action.JOINED) {
       message = {
         from: this.user,
-        action: action
+        action: action,
+        time: new Date()
       };
     } else if (action === Action.RENAME) {
       message = {
         action: action,
         content: {
-          username: this.user.name,
-          previousUsername: params.previousUsername
+          username: this.user.username,
+          previousUsername: params.previousUsername,
+          time: new Date()
         }
       };
     }
 
     this.socketService.send(message);
-  }
-
-  private initUser(): void {
-    const randomId = this.getRandomId();
-    this.user = {
-      id: `${randomId}`,
-      name: "User #" + randomId,
-      avatar: 'https://via.placeholder.com/100x100'
-    };
-  }
-
-  private getRandomId(): number {
-    return Math.floor(Math.random() * (1000000)) + 1;
   }
 
   private initIoConnection(): void {
