@@ -1,0 +1,15 @@
+.container {
+  margin-top: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+mat-card {
+  width: 60%;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
