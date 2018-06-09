@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { NavigationComponent } from './navigation/navigation.component';
 import { AngularMaterialModule } from '../modules/angular-material.module';
+import { RouterModule } from '@angular/router';
 
 const BASE_MODULES = [
   CommonModule,
-  AngularMaterialModule
+  AngularMaterialModule,
+  RouterModule
 ];
 
 const COMPONENTS = [

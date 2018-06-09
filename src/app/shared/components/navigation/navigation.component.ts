@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  user: User;
 
   public navItems = [
     {
@@ -29,14 +32,10 @@ export class NavigationComponent implements OnInit {
     },
   ];
 
-  public user = {
-    username: 'MartinJuul',
-    avatar: 'https://via.placeholder.com/100x100'
-  };
-
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.user = this.userService.getUser();
   }
 
 }
