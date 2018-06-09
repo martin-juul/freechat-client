@@ -25,7 +25,10 @@ function createWindow() {
     height: size.height,
     titleBarStyle: 'hidden-inset',
     vibrancy: 'dark',
-    title: 'FreeChat'
+    title: 'FreeChat',
+    webPreferences: {
+      webSecurity: false
+    }
   });
 
   if (serve) {
