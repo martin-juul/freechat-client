@@ -17,6 +17,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 
 import { ElectronService } from './providers/electron.service';
+import { ParseUrl } from './shared/pipes/parse-url.pipe';
 import { SocketService } from './shared/services/socket.service';
 
 import { WebviewDirective } from './directives/webview.directive';
@@ -46,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsComponent,
     SignupComponent,
     SigninComponent,
+    ParseUrl
   ],
   imports: [
     BrowserModule,
