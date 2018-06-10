@@ -1,4 +1,5 @@
-/* tslint:disable:member-ordering */
+/*
+/!* tslint:disable:member-ordering *!/
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
@@ -37,3 +38,4 @@ export class DynamicContent {
   }
 
 }
+*/

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ParseUrl } from './parse-url.pipe';
 
 const PIPES = [
-  ParseUrl
+  //ParseUrl
 ];
 
 @NgModule({
