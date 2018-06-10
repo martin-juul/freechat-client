@@ -1,29 +1,36 @@
 <div class="container">
-  <div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <nav class="sidebar-left">
+    <app-navigation></app-navigation>
+  </nav>
 
-    <mat-list *ngFor="let message of messages">
-      <mat-list-item class="chat-box">
-        <div class="chat-user">
-          <img matListAvatar *ngIf="message.action === undefined" [src]="message.from.avatar">
+  <div class="chat-workspace">
 
-          <div class="chat-user-info">
-            <h3 *ngIf="message.action === undefined">{{ message.from.username }}</h3>
-            <span>{{ message.time | date:'shortTime' }}</span>
+    <div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+
+      <mat-list *ngFor="let message of messages">
+        <mat-list-item class="chat-box">
+          <div class="chat-user">
+            <img matListAvatar *ngIf="message.action === undefined" [src]="message.from.avatar">
+
+            <div class="chat-user-info">
+              <h3 *ngIf="message.action === undefined">{{ message.from.username }}</h3>
+              <span>{{ message.time | date:'shortTime' }}</span>
+            </div>
+
           </div>
-
-        </div>
-        <p class="chat-message" *ngIf="message.action === undefined">{{ message.content }}</p>
-        <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
-          <span> <b>{{message.from.username}}</b> joined to the conversation. </span>
-        </p>
+          <p class="chat-message" *ngIf="message.action === undefined">{{ message.content }}</p>
+          <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
+            <span> <span class="chat-notification-highlight">{{message.from.username}}</span> joined to the conversation. </span>
+          </p>
 
 
-        <p mat-line *ngIf="message.action === action.RENAME" class="chat-notification">
-          <span> <b>{{message.content.previousUsername}}</b> is now <b>{{message.content.username}}</b> </span>
-        </p>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
+          <p mat-line *ngIf="message.action === action.RENAME" class="chat-notification">
+            <span> <b>{{message.content.previousUsername}}</b> is now <b>{{message.content.username}}</b> </span>
+          </p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </div>
 
     <div class="chat-message-editor">
 
@@ -52,18 +59,6 @@
         <img matListAvatar src="{{ client?.avatar }}">
         <h3 matLine> {{ client?.username }} </h3>
       </mat-list-item>
-      <!--<mat-list-item>
-        <img matListAvatar src="https://via.placeholder.com/100x100">
-        <h3 matLine> Børge Mogensen </h3>
-      </mat-list-item>
-      <mat-list-item>
-        <img matListAvatar src="https://via.placeholder.com/100x100">
-        <h3 matLine> Egon Olsen </h3>
-      </mat-list-item>
-      <mat-list-item>
-        <img matListAvatar src="https://via.placeholder.com/100x100">
-        <h3 matLine> Benny Fransen </h3>
-      </mat-list-item>-->
     </mat-list>
 
     <!--<mat-divider></mat-divider>

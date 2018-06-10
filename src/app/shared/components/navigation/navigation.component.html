@@ -4,15 +4,15 @@
 
     <ng-container *ngFor="let item of navItems">
 
-      <mat-expansion-panel expanded="true">
+      <mat-expansion-panel expanded="true" [hideToggle]="true">
         <mat-expansion-panel-header class="app-sidebar-submenu-header">{{ item.label }}</mat-expansion-panel-header>
 
         <ng-container *ngIf="item.subMenu">
 
           <mat-nav-list>
-            <mat-list-item *ngFor="let entry of item.subMenu">
+            <mat-list-item *ngFor="let entry of item.subMenu" class="sub-menu-item">
               <img *ngIf="entry.icon" matListAvatar src="{{ entry.icon }}">
-              <a matLine href="{{ entry.goTo }}">{{ entry.label }}</a>
+              <a class="sub-menu-item-label" matLine href="{{ entry.goTo }}">{{ entry.label }}</a>
             </mat-list-item>
           </mat-nav-list>
 
@@ -27,7 +27,8 @@
       <div class="app-sidebar-user">
         <img class="app-sidebar-user-avatar" src="{{ user.avatar }}">
         <p class="app-sidebar-user-name">{{ user.username }}</p>
-        <button routerLink="settings">Settings</button>
+        <button routerLink="settings"></button>
+        <button (click)="logOut()">Log Out</button>
       </div>
   </mat-card>
 

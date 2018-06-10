@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 
 const LOGIN_SERVER = 'http://localhost:3000/';
@@ -28,6 +27,13 @@ export class LoginService
 
   public verifyToken(userId: string, token: string) {
     return this.http.post<User>(LOGIN_SERVER + 'user/verify-token', {
+      token: token
+    }, { observe: 'response' });
+  }
+
+  public logOut(userId: string, token: string) {
+    return this.http.post(LOGIN_SERVER + 'user/logout', {
+      userId: userId,
       token: token
     }, { observe: 'response' });
   }

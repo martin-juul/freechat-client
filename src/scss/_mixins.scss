@@ -42,3 +42,77 @@
     src: $src;
   }
 }
+
+// =============================================================================
+// Responsive
+// =============================================================================
+
+// Variables
+// ---------
+
+// Extra small screen / phone
+$screen-xs: 480px;
+
+// Small screen / tablet
+$screen-sm: 768px;
+
+// Medium screen / desktop
+$screen-md: 992px;
+
+// Large screen / wide desktop
+$screen-lg: 1200px;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm - 1);
+$screen-sm-max: ($screen-md - 1);
+$screen-md-max: ($screen-lg - 1);
+
+// respond-to()
+// ------------
+// Usage
+//.profile-pic {
+//  float: left;
+//  width: 250px;
+//
+//  @include respond-to(xs) {
+//    width: 100%;
+//  }
+//  @include respond-to(sm) {
+//    width: 125px;
+//  }
+//  @include respond-to(md) {
+//    float: none;
+//  }
+//}
+
+@mixin respond-to($media) {
+  @if $media == xs {
+    @media (max-width: $screen-xs-max) { @content }
+  }
+  @else if $media == sm {
+    @media (min-width: $screen-sm) and (max-width: $screen-sm-max) { @content }
+  }
+  @else if $media == md {
+    @media (min-width: $screen-md) and (max-width: $screen-md-max) { @content }
+  }
+  @else if $media == lg {
+    @media (min-width: $screen-lg) { @content }
+  }
+}
+
+// =============================================================================
+// Text
+// =============================================================================
+
+// text-truncate
+// ------------
+// Usage
+// .text-truncate {
+//    @include text-truncate
+// }
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

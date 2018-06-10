@@ -1,8 +1,18 @@
+//noinspection CssUnknownTarget
+@import '~scss/mixins';
+
 .app-sidebar {
   width: 300px;
   height: 100%;
   user-select: none;
   cursor: default;
+  transition: ease all .5s;
+  @include respond-to(xs) {
+    width: 80px;
+  }
+  @include respond-to(sm) {
+    width: 200px;
+  }
 }
 
 .app-sidebar-bottom-divider {
@@ -31,6 +41,17 @@ mat-card {
   padding: 12px;
 }
 
+.sub-menu-item {
+  @include respond-to(xs) {
+    justify-content: left;
+  }
+  .sub-menu-item-label {
+    @include respond-to(xs) {
+      display: none;
+    }
+  }
+}
+
 .app-sidebar-user-avatar {
   width: 45px;
   height: 45px;
@@ -39,4 +60,11 @@ mat-card {
 }
 .app-sidebar-user-name {
   margin-left: 15px;
+}
+
+.mat-expansion-panel-header {
+  padding: 0 24px;
+  @include respond-to(xs) {
+    padding: 0;
+  }
 }

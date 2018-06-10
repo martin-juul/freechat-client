@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import * as socketIo from 'socket.io-client';
-import { Message } from '../models/message.model';
+import { Message } from '../models/messaging/message.model';
 import { Observable } from 'rxjs';
-import { Event } from '../models/event.model';
+import { Event } from '../models/messaging/event.model';
 
 //import { environment } from '../../environments/environment';
 

@@ -6,6 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppLoadModule } from './app-load/app-load.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -62,7 +63,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [ HttpClient ]
       }
     }),
-    AppLoadModule
+    AppLoadModule,
+    FontAwesomeModule,
   ],
   providers: [
     ElectronService,

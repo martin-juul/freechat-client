@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SocketService } from '../../shared/services/socket.service';
 
-import { Action } from '../../shared/models/action.model';
+import { Action } from '../../shared/models/messaging/action.model';
 import { User } from '../../shared/models/user.model';
-import { Event } from '../../shared/models/event.model';
-import { Message } from '../../shared/models/message.model';
+import { Event } from '../../shared/models/messaging/event.model';
+import { Message } from '../../shared/models/messaging/message.model';
 import { LoginService } from '../../shared/services/login.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../shared/services/user.service';

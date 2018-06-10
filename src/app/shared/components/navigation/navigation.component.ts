@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 
@@ -32,10 +33,20 @@ export class NavigationComponent implements OnInit {
     },
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
+  }
+
+  logOut() {
+    this.userService.logOutUser();
+    this.router.navigateByUrl('/auth/signin')
+      .then(() => {
+        console.log('User logged out!');
+        this.user = null;
+      });
   }
 
 }
