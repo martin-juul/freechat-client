@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit, OnDestroy
 
   ngOnInit() {
     this.initIoConnection();
-    console.log('lol');
 
     this.user = this.userService.getUser();
     this.connectedClients.push(this.user);

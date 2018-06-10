@@ -11,7 +11,6 @@ export class ParseUrl implements PipeTransform {
   hashtags: any = /(^|\s)(#[a-z\d][\w-]*)/ig; // Find/Replace #hashtags in text
   mentions: any = /(^|\s)(@[a-z\d][\w-]*)/ig; // Find/Replace @Handle/Mentions in text
   emails: any = /(\S+@\S+\.\S+)/gim; // Find/Replace email addresses in text
-
   transform(text: string) {
     return this.parseUrl(text);
   }
