@@ -30,6 +30,7 @@ function createWindow() {
       webSecurity: false
     }
   });
+  //webContents = win.webContents;
 
   if (serve) {
     require('electron-reload')(__dirname, {
@@ -43,7 +44,7 @@ function createWindow() {
     }));
   }
 
-  //win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -52,6 +53,13 @@ function createWindow() {
     // when you should delete the corresponding element.
     win = null;
   });
+
+  win.webContents.on('new-window', function (event, reqUrl){
+    const shell = require('electron').shell;
+    event.preventDefault();
+    shell.openExternal(reqUrl);
+  });
+
 }
 
 try {
@@ -78,7 +86,8 @@ try {
     }
   });
 
+
 } catch (e) {
   // Catch Error
-  // throw e;
+  throw e;
 }
