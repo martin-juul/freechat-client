@@ -20,7 +20,7 @@
           </div>
           <p class="chat-message" *ngIf="message.action === undefined">{{ message.content }}</p>
           <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
-            <span> <span class="chat-notification-highlight">{{message.from.username}}</span> joined to the conversation. </span>
+            <span> <span class="chat-notification-highlight">{{message.from.username}}</span> joined the conversation. </span>
           </p>
 
 

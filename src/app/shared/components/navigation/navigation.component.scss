@@ -26,6 +26,9 @@
 .app-sidebar-user {
   display: flex;
   align-items: center;
+  @include respond-to(xs) {
+    flex-direction: column;
+  }
 }
 
 .app-sidebar-divider {
@@ -41,9 +44,16 @@ mat-card {
   padding: 12px;
 }
 
+.sub-menu {
+  padding: 6px 12px;
+}
+
 .sub-menu-item {
   @include respond-to(xs) {
     justify-content: left;
+    img {
+      margin: 0 auto;
+    }
   }
   .sub-menu-item-label {
     @include respond-to(xs) {
@@ -60,6 +70,33 @@ mat-card {
 }
 .app-sidebar-user-name {
   margin-left: 15px;
+  @include respond-to(xs) {
+    display: none;
+  }
+}
+
+.app-sidebar-user-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 18%;
+  margin-left: 5%;
+  color: #ccc;
+  @include respond-to(xs) {
+   //flex-direction: column;
+    margin-left: unset;
+    margin-top: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+  span {
+    transition: color 0.2s;
+    cursor: pointer;
+    font-size: 1.2em;
+  }
+  span:hover {
+    color: white;
+  }
 }
 
 .mat-expansion-panel-header {

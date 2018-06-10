@@ -23,7 +23,6 @@
 }
 
 .chat-workspace {
-  overflow: scroll;
   height: 100vh;
   -webkit-app-region: no-drag;
   flex: 1;
@@ -83,6 +82,7 @@
     justify-content: center;
     flex-direction: column;
     height: 15%;
+    margin-top: auto;
     .chat-message-toolbar {
       width: 100%;
       mat-toolbar {
@@ -96,7 +96,8 @@
       }
     }
     .chat-message-input {
-      width: 99%;
+      margin: 0 auto;
+      width: 90%;
       height: 25%;
     }
   }

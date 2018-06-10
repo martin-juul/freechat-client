@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faCog, faSignOut } from '@fortawesome/pro-regular-svg-icons';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 
@@ -10,6 +11,8 @@ import { UserService } from '../../services/user.service';
 })
 export class NavigationComponent implements OnInit {
   user: User;
+  faCog = faCog;
+  faSignOut = faSignOut;
 
   public navItems = [
     {

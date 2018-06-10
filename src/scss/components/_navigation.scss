@@ -1,4 +1,14 @@
+@import "../mixins";
+
 .app-sidebar .mat-expansion-panel-body,
 .app-sidebar .mat-expansion-panel-header {
   padding: 0;
+}
+
+.sub-menu .mat-nav-list,
+.sub-menu .mat-list-item,
+.sub-menu .mat-list-item-content {
+  @include respond-to(xs) {
+    padding: 0 !important;
+  }
 }

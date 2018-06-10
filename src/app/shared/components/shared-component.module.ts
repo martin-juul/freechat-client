@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NavigationComponent } from './navigation/navigation.component';
 import { AngularMaterialModule } from '../modules/angular-material.module';
@@ -8,7 +9,8 @@ import { RouterModule } from '@angular/router';
 const BASE_MODULES = [
   CommonModule,
   AngularMaterialModule,
-  RouterModule
+  RouterModule,
+  FontAwesomeModule,
 ];
 
 const COMPONENTS = [

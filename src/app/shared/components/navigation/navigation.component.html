@@ -2,34 +2,40 @@
 
   <h1 class="app-sidebar-title">FreeChat</h1>
 
-    <ng-container *ngFor="let item of navItems">
+  <ng-container *ngFor="let item of navItems">
 
-      <mat-expansion-panel expanded="true" [hideToggle]="true">
-        <mat-expansion-panel-header class="app-sidebar-submenu-header">{{ item.label }}</mat-expansion-panel-header>
+    <mat-expansion-panel expanded="true" [hideToggle]="true">
+      <mat-expansion-panel-header class="app-sidebar-submenu-header">{{ item.label }}</mat-expansion-panel-header>
 
-        <ng-container *ngIf="item.subMenu">
+      <ng-container *ngIf="item.subMenu">
 
-          <mat-nav-list>
-            <mat-list-item *ngFor="let entry of item.subMenu" class="sub-menu-item">
-              <img *ngIf="entry.icon" matListAvatar src="{{ entry.icon }}">
-              <a class="sub-menu-item-label" matLine href="{{ entry.goTo }}">{{ entry.label }}</a>
-            </mat-list-item>
-          </mat-nav-list>
+        <mat-nav-list class="sub-menu">
+          <mat-list-item *ngFor="let entry of item.subMenu" class="sub-menu-item">
+            <img *ngIf="entry.icon" matListAvatar src="{{ entry.icon }}">
+            <a class="sub-menu-item-label" matLine href="{{ entry.goTo }}">{{ entry.label }}</a>
+          </mat-list-item>
+        </mat-nav-list>
 
-        </ng-container>
-      </mat-expansion-panel>
+      </ng-container>
+    </mat-expansion-panel>
 
-    </ng-container>
+  </ng-container>
 
   <mat-divider class="app-sidebar-bottom-divider"></mat-divider>
 
   <mat-card>
-      <div class="app-sidebar-user">
-        <img class="app-sidebar-user-avatar" src="{{ user.avatar }}">
-        <p class="app-sidebar-user-name">{{ user.username }}</p>
-        <button routerLink="settings"></button>
-        <button (click)="logOut()">Log Out</button>
+    <div class="app-sidebar-user">
+      <img class="app-sidebar-user-avatar" src="{{ user.avatar }}">
+      <p class="app-sidebar-user-name">{{ user.username }}</p>
+      <div class="app-sidebar-user-actions">
+        <span routerLink="settings">
+          <fa-icon [icon]="faCog" title="Settings"></fa-icon>
+        </span>
+        <span (click)="logOut()">
+          <fa-icon [icon]="faSignOut" title="Sign out"></fa-icon>
+        </span>
       </div>
+    </div>
   </mat-card>
 
 </mat-sidenav-container>
