@@ -74,3 +74,15 @@ body {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+.chat-message-url:visited {
+  color: #8d8d8d;
+}
+.chat-message-url {
+  color: #cecece;
+  font-weight: bold;
+}
+.chat-message-url:hover {
+  color: #e6e6e6;
+  transition: all ease 0.2s;
+}

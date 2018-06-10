@@ -17,7 +17,7 @@
           </div>
 
         </div>
-        <p class="chat-message speech-bubble" *ngIf="message.action === undefined">{{ message.content }}</p>
+        <div class="chat-message speech-bubble" *ngIf="message.action === undefined" [innerHtml]="message.content | parseUrl"></div>
         <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
           <span> <span
             class="chat-notification-highlight">{{message.from.username}}</span> joined the conversation. </span>
