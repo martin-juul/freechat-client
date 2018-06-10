@@ -1,6 +1,7 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, Menu, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import MenuItemConstructorOptions = Electron.MenuItemConstructorOptions;
 
 let win, serve;
 const args = process.argv.slice(1);
@@ -10,6 +11,111 @@ try {
   require('dotenv').config();
 } catch {
   console.log('asar');
+}
+
+function buildMenu() {
+  const template: MenuItemConstructorOptions[] = [
+    {
+      label: 'Edit',
+      submenu: [
+        { role: 'undo' },
+        { role: 'redo' },
+        { type: 'separator' },
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' },
+        { role: 'pasteandmatchstyle' },
+        { role: 'delete' },
+        { role: 'selectall' }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' },
+        { type: 'separator' },
+        { role: 'resetzoom' },
+        { role: 'zoomin' },
+        { role: 'zoomout' },
+        { type: 'separator' },
+        { role: 'togglefullscreen' }
+      ]
+    },
+    {
+      role: 'window',
+      submenu: [
+        { role: 'minimize' },
+        { role: 'close' }
+      ]
+    },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Documentation',
+          click() {
+            require('electron').shell.openExternal('https://github.com/martin-juul/freechat-client/wiki');
+          }
+        },
+        {
+          label: 'Github Repo',
+          click() {
+            require('electron').shell.openExternal('https://github.com/martin-juul/freechat-client');
+          }
+        },
+        {
+          label: 'Issues',
+          click() {
+            require('electron').shell.openExternal('https://github.com/martin-juul/freechat-client/issues');
+          }
+        }
+      ]
+    }
+  ];
+
+  if (process.platform === 'darwin') {
+    template.unshift({
+      label: app.getName(),
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'services', submenu: [] },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' }
+      ]
+    });
+
+    // Edit menu
+    /*template[1].submenu.push(
+      {type: 'separator'},
+      {
+        label: 'Speech',
+        submenu: [
+          {role: 'startspeaking'},
+          {role: 'stopspeaking'}
+        ]
+      }
+    );*/
+
+    // Window menu
+    template[ 3 ].submenu = [
+      { role: 'close' },
+      { role: 'minimize' },
+      { role: 'zoom' },
+      { type: 'separator' },
+      { role: 'front' }
+    ];
+  }
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
 }
 
 function createWindow() {
@@ -34,7 +140,8 @@ function createWindow() {
 
   if (serve) {
     require('electron-reload')(__dirname, {
-     electron: require(`${__dirname}/node_modules/electron`)});
+      electron: require(`${__dirname}/node_modules/electron`)
+    });
     win.loadURL('http://localhost:4200');
   } else {
     win.loadURL(url.format({
@@ -54,12 +161,11 @@ function createWindow() {
     win = null;
   });
 
-  win.webContents.on('new-window', function (event, reqUrl){
+  win.webContents.on('new-window', function (event, reqUrl) {
     const shell = require('electron').shell;
     event.preventDefault();
     shell.openExternal(reqUrl);
   });
-
 }
 
 try {
@@ -68,6 +174,7 @@ try {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   app.on('ready', createWindow);
+  app.once('ready', buildMenu);
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
@@ -85,7 +192,6 @@ try {
       createWindow();
     }
   });
-
 
 } catch (e) {
   // Catch Error

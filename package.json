@@ -1,5 +1,6 @@
 {
   "name": "freechat-client",
+  "productName": "Free Chat",
   "version": "0.0.1",
   "description": "A proper free chat client.",
   "homepage": "https://github.com/martin-juul/FreeChatClient",
@@ -28,20 +29,7 @@
     "e2e": "npm-run-all -p -r pree2e:build pree2e:protractor"
   },
   "dependencies": {
-    "@angular/animations": "^5.2.9",
-    "@angular/cdk": "^5.2.5",
-    "@angular/material": "^5.2.5",
-    "@fortawesome/angular-fontawesome": "0.1.0-10",
-    "@fortawesome/fontawesome-svg-core": "^1.2.0-11",
-    "@fortawesome/free-brands-svg-icons": "^5.1.0-11",
-    "@fortawesome/free-regular-svg-icons": "^5.1.0-11",
-    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
-    "@fortawesome/pro-light-svg-icons": "^5.1.0-11",
-    "@fortawesome/pro-regular-svg-icons": "^5.1.0-11",
-    "@fortawesome/pro-solid-svg-icons": "^5.1.0-11",
-    "express": "^4.16.3",
-    "inter-ui": "^2.5.1",
-    "socket.io": "^2.1.1"
+
   },
   "devDependencies": {
     "@angular/cli": "1.7.4",
@@ -86,6 +74,19 @@
     "typescript": "2.6.2",
     "wait-on": "2.1.0",
     "webdriver-manager": "12.0.6",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",    "@angular/animations": "^5.2.9",
+    "@angular/cdk": "^5.2.5",
+    "@angular/material": "^5.2.5",
+    "@fortawesome/angular-fontawesome": "0.1.0-10",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-11",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0-11",
+    "@fortawesome/free-regular-svg-icons": "^5.1.0-11",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/pro-light-svg-icons": "^5.1.0-11",
+    "@fortawesome/pro-regular-svg-icons": "^5.1.0-11",
+    "@fortawesome/pro-solid-svg-icons": "^5.1.0-11",
+    "express": "^4.16.3",
+    "inter-ui": "^2.5.1",
+    "socket.io": "^2.1.1"
   }
 }

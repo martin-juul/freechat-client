@@ -1,5 +1,7 @@
 {
-  "productName": "FreeChat",
+  "productName": "Free Chat",
+  "appId": "com.freechat.client",
+  "copyright": "Copyright © 2018 Martin Juul",
   "directories": {
     "output": "app-builds"
   },
@@ -7,6 +9,7 @@
         "**/*",
         "!*.ts",
         "!*.code-workspace",
+        "!.idea",
         "!LICENSE.md",
         "!package.json",
         "!package-lock.json",
@@ -27,9 +30,13 @@
   },
   "mac": {
     "icon": "dist",
+    "category": "public.app-category.social-networking",
     "target": [
       "dmg"
-    ]
+    ],
+    "extendInfo": {
+      "CFBundleDisplayName": "Free Chat"
+    }
   },
   "linux": {
     "icon": "dist",
