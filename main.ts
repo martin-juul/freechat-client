@@ -129,7 +129,7 @@ function createWindow() {
     y: 0,
     width: size.width,
     height: size.height,
-    titleBarStyle: 'hidden-inset',
+    titleBarStyle: 'hiddenInset',
     vibrancy: 'dark',
     title: 'FreeChat',
     webPreferences: {
