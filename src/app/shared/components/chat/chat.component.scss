@@ -17,13 +17,14 @@
 .channel-bar {
   flex-shrink: 1;
   background-color: #333333;
-  height: 17%;
+  padding: .94%;
   position: relative;
   span {
     color: #be8e47;
     font-weight: bold;
     font-size: 1.3rem;
-    margin-left: 1%;
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
   }
 }
 
@@ -90,6 +91,7 @@
 
 .chat-message-editor-container {
   flex-shrink: 1;
+  -webkit-app-region: no-drag;
 }
 
 .chat-message-editor {
