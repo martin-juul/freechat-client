@@ -1,20 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCog, faSignOut } from '@fortawesome/pro-regular-svg-icons';
+import { ChatRoom } from '../../models/chat-room.model';
 import { User } from '../../models/user.model';
+import { SocketService } from '../../services/socket.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrls: [ './navigation.component.scss' ]
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit
+{
   user: User;
   faCog = faCog;
   faSignOut = faSignOut;
+  rooms: ChatRoom[] = [];
 
-  public navItems = [
+  /*public navItems = [
     {
       label: 'Channels',
       goTo: '/channels',
@@ -34,13 +38,33 @@ export class NavigationComponent implements OnInit {
         { label: 'Cooper', icon: 'https://via.placeholder.com/100x100', goTo: '/friends/cooper' },
       ]
     },
-  ];
+  ];*/
+
+  public navItems = [];
 
   constructor(private userService: UserService,
-              private router: Router) { }
+              private router: Router,
+              private socketService: SocketService) {
+  }
 
   ngOnInit() {
     this.user = this.userService.getUser();
+    this.socketService.getRooms()
+      .then((chatRooms: ChatRoom[]) => {
+        chatRooms.forEach(cRoom => this.rooms.push(cRoom));
+
+        this.navItems.push({
+          label: 'Channels',
+          subMenu: [ ...this.rooms ]
+        });
+
+      })
+      .catch(err => console.error(err));
+  }
+
+  changeChannel(roomId: string) {
+    // this.socketService.disconnect();
+    this.socketService.initSocket(roomId);
   }
 
   logOut() {
