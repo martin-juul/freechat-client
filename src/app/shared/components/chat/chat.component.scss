@@ -10,19 +10,32 @@
   overflow: scroll;
 }
 
+.chat-messages {
+  padding: 0;
+}
+
+.channel-bar {
+  flex-shrink: 1;
+  background-color: #333333;
+  height: 17%;
+  position: relative;
+  span {
+    color: #be8e47;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-left: 1%;
+  }
+}
+
 .chat-container {
-  //height: 100%;
-  //width: 100%;
   -webkit-app-region: no-drag;
   flex-grow: 1;
   align-items: center;
   overflow: scroll;
-  //position: relative;
   .chat-box {
     display: flex;
     flex-direction: column;
     height: max-content;
-    //align-items: center;
     .chat-user {
       display: flex;
       flex-direction: row;
@@ -32,6 +45,9 @@
         width: 20%;
       }
       @include respond-to(sm) {
+        width: 25%;
+      }
+      @include respond-to(md) {
         width: 25%;
       }
       img {

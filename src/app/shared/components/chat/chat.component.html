@@ -1,7 +1,11 @@
 <div class="container" *ngIf="channel">
+  <div class="channel-bar">
+    <span>{{ channel?.label }}</span>
+  </div>
+
   <div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 
-    <mat-list *ngFor="let message of _messages">
+    <mat-list *ngFor="let message of _messages" class="chat-messages">
       <mat-list-item class="chat-box">
         <div class="chat-user">
           <img matListAvatar *ngIf="message?.action === undefined" [src]="message?.from.avatar">
