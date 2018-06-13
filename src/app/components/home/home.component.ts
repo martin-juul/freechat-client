@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SocketService } from '../../shared/services/socket.service';
+import { Subscription } from 'rxjs';
+import { ChatRoom } from '../../shared/models/chat-room.model';
 
 import { Action } from '../../shared/models/messaging/action.model';
-import { User } from '../../shared/models/user.model';
 import { Event } from '../../shared/models/messaging/event.model';
 import { Message } from '../../shared/models/messaging/message.model';
+import { User } from '../../shared/models/user.model';
 import { LoginService } from '../../shared/services/login.service';
-import { Subscription } from 'rxjs';
+import { SocketService } from '../../shared/services/socket.service';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -16,6 +17,10 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class HomeComponent implements OnInit, OnDestroy
 {
+  currentChannel: ChatRoom;
+
+
+
   action = Action;
   user: User;
   messages: Message[] = [];
@@ -31,17 +36,17 @@ export class HomeComponent implements OnInit, OnDestroy
   }
 
   ngOnInit() {
-    this.initIoConnection();
+    //this.initIoConnection();
 
     this.user = this.userService.getUser();
-    this.connectedClients.push(this.user);
-    this.sendNotification(Action.JOINED);
+    //this.connectedClients.push(this.user);
+    //this.sendNotification(Action.JOINED);
 
-    console.log(this.user);
+    //console.log(this.user);
   }
 
   ngOnDestroy() {
-    this.connectedClients = [];
+    //this.connectedClients = [];
   }
 
   public sendMessage(message: string): void {
@@ -82,7 +87,7 @@ export class HomeComponent implements OnInit, OnDestroy
   }
 
   private initIoConnection(): void {
-    this.socketService.initSocket();
+    this.socketService.initSocket('ba172393-0a4a-43ef-a465-4c2906c1c3ff');
 
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {

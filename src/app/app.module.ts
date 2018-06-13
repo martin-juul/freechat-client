@@ -45,8 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     WebviewDirective,
     SettingsComponent,
     SignupComponent,
-    SigninComponent,
-    ParseUrl
+    SigninComponent
   ],
   imports: [
     BrowserModule,

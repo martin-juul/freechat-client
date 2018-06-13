@@ -12,23 +12,24 @@ import { Message } from '../models/messaging/message.model';
 @Injectable()
 export class SocketService
 {
-  public connectedRoom;
+  //public connectedRooms: ChatRoom[] = [];
   private socket;
   private socketServer = 'http://localhost:8080';
-  private socketRooms: ChatRoom[] = [];
 
   constructor(private http: HttpClient) {
   }
 
-  public initSocket(roomId?: string): void {
+  public initSocket(roomId: string): void {
 
-    if (roomId) {
+    //if (roomId) {
       this.socket = socketIo(this.socketServer + '/' + roomId);
-      this.connectedRoom = roomId;
-    } else {
-      this.socket = socketIo(this.socketServer);
-      this.connectedRoom = '/';
-    }
+      console.log(this.socket);
+      //this.connectedRooms.push({id: roomId});
+    //}
+    //else {
+      //this.socket = socketIo(this.socketServer);
+      //this.connectedRoom = '/';
+    //}
   }
 
   public send(message: Message): void {
@@ -63,9 +64,9 @@ export class SocketService
 
   public disconnect(roomId?: string) {
     if (roomId) {
-      this.socket.leave(roomId);
+      //this.socket.close(roomId);
     } else {
-      this.socket.leave();
+      this.socket.close();
     }
   }
 }

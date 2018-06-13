@@ -14,6 +14,10 @@
   flex: 1;
 }
 
+.main-content {
+  flex: 1;
+}
+
 .sidebar-right {
   flex: 0 0 12em;
   transition: all ease 0.5s;
@@ -25,120 +29,9 @@
   }
 }
 
-.chat-container {
-  height: 100vh;
-  -webkit-app-region: no-drag;
-  flex: 1;
-  width: 100%;
-  align-items: center;
-  overflow: scroll;
-  position: relative;
-  .chat-box {
-    display: flex;
-    flex-direction: column;
-    height: max-content;
-    //align-items: center;
-    .chat-user {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 13%;
-      @include respond-to(xs) {
-        width: 20%;
-      }
-      @include respond-to(sm) {
-        width: 25%;
-      }
-      img {
-        margin-right: 8px;
-      }
-      .chat-user-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        h3 {
-          font-size: 1rem;
-        }
-        span {
-          font-size: .7rem;
-        }
-        * {
-          margin: 0;
-        }
-      }
-    }
-  }
-  .chat-notification {
-    color: #797979;
-    .chat-notification-highlight {
-      color: #9a9a9a;
-      font-weight: bold;
-    }
-  }
-  .chat-message {
-    min-width: 5%;
-    max-width: 80%;
-    word-break: break-word;
-    vertical-align: text-bottom;
-    margin-top: 1.5%;
-    display: inline-block;
-    white-space: pre-line;
-    margin-bottom: 1.2em;
-  }
-}
-
-.chat-message-editor {
-  background-color: #292929;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 15%;
-  margin-top: auto;
-  position: absolute;
-  width: 100%;
-  top: unset;
-  .chat-message-toolbar {
-    width: 100%;
-    mat-toolbar {
-      justify-content: space-between;
-      height: 5%;
-      .cmt-btns {
-        display: flex;
-        width: 20%;
-        justify-content: space-between;
-      }
-    }
-  }
-  .chat-message-input {
-    margin: 0 auto;
-    width: 90%;
-    height: 25%;
-  }
-}
-
 .header {
   p {
     text-align: center;
   }
 }
 
-.speech-bubble {
-  position: relative;
-  background: #4b5988;
-  border-radius: .4em;
-  padding: 1%;
-}
-
-.speech-bubble:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 0;
-  height: 0;
-  border: 0.719em solid transparent;
-  border-right-color: #4b5988;
-  border-left: 0;
-  margin-top: -0.719em;
-  margin-left: -0.719em;
-}

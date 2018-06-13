@@ -12,7 +12,7 @@
         <mat-nav-list class="sub-menu">
           <mat-list-item *ngFor="let entry of item.subMenu" class="sub-menu-item">
             <img *ngIf="entry.icon" matListAvatar src="{{ entry.icon }}">
-            <a *ngIf="entry?.id" class="sub-menu-item-label" matLine (click)="changeChannel(entry.id)">{{entry.label}}</a>
+            <a *ngIf="entry?.id" class="sub-menu-item-label" matLine (click)="changeChannel(entry)">{{entry.label}}</a>
             <!--<a *ngIf="entry?.goTo" class="sub-menu-item-label" matLine href="{{ entry?.goTo }}">{{ entry.label }}</a>-->
           </mat-list-item>
         </mat-nav-list>

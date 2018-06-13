@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { faCog, faSignOut } from '@fortawesome/pro-regular-svg-icons';
 import { ChatRoom } from '../../models/chat-room.model';
 import { User } from '../../models/user.model';
+import { ChatRoomService } from '../../services/chat-room.service';
 import { SocketService } from '../../services/socket.service';
 import { UserService } from '../../services/user.service';
 
@@ -17,6 +18,7 @@ export class NavigationComponent implements OnInit
   faCog = faCog;
   faSignOut = faSignOut;
   rooms: ChatRoom[] = [];
+  currentChatRoom: ChatRoom;
 
   /*public navItems = [
     {
@@ -44,7 +46,8 @@ export class NavigationComponent implements OnInit
 
   constructor(private userService: UserService,
               private router: Router,
-              private socketService: SocketService) {
+              private socketService: SocketService,
+              private chatRoomService: ChatRoomService) {
   }
 
   ngOnInit() {
@@ -62,9 +65,11 @@ export class NavigationComponent implements OnInit
       .catch(err => console.error(err));
   }
 
-  changeChannel(roomId: string) {
-    // this.socketService.disconnect();
-    this.socketService.initSocket(roomId);
+  changeChannel(room: ChatRoom) {
+    this.currentChatRoom = room;
+    if (room && room !== this.currentChatRoom) {
+      this.chatRoomService.setRoom(room)
+    }
   }
 
   logOut() {
