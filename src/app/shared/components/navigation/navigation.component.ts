@@ -68,7 +68,7 @@ export class NavigationComponent implements OnInit
   changeChannel(room: ChatRoom) {
     this.currentChatRoom = room;
     if (room && room !== this.currentChatRoom) {
-      this.chatRoomService.setRoom(room)
+      this.chatRoomService.setRoom(room);
     }
   }
 

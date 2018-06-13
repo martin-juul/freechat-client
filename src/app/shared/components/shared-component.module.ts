@@ -1,14 +1,14 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AngularMaterialModule } from '../modules/angular-material.module';
 import { ParseUrl } from '../pipes/parse-url.pipe';
 import { ChatRoomService } from '../services/chat-room.service';
+import { ChatComponent } from './chat/chat.component';
 
 import { NavigationComponent } from './navigation/navigation.component';
-import { AngularMaterialModule } from '../modules/angular-material.module';
-import { RouterModule } from '@angular/router';
-import { ChatComponent } from './chat/chat.component';
 
 const BASE_MODULES = [
   CommonModule,
@@ -38,11 +38,12 @@ const COMPONENTS = [
     ChatRoomService
   ]
 })
-export class SharedComponentModule {
+export class SharedComponentModule
+{
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: SharedComponentModule,
       providers: []
-    }
+    };
   }
 }

@@ -12,7 +12,6 @@
 
       </div>
       <ng-container *ngIf="message?.action == undefined">
-        <!-- <div class="chat-message speech-bubble" [innerHtml]="message?.content | parseUrl"></div> -->
         <div class="chat-message speech-bubble" [innerHtml]="message?.content | parseUrl"></div>
       </ng-container>
       <p mat-line *ngIf="message.action === _action.JOINED" class="chat-notification">

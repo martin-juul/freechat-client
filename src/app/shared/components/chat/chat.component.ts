@@ -16,7 +16,6 @@ import { UserService } from '../../services/user.service';
 })
 export class ChatComponent implements OnInit, OnDestroy
 {
-  //@Input('channelId') channelId: string;
   channel: ChatRoom;
   ioConnection: any;
   protected _action = Action;
@@ -40,10 +39,10 @@ export class ChatComponent implements OnInit, OnDestroy
   }
 
   connectChat(room: ChatRoom) {
-      this._messages = [];
-      this.onInitIoConnection(room.id);
-      this._connectedClients.push(this.userService.getUser());
-      this.onSendNotification(Action.JOINED);
+    this._messages = [];
+    this.onInitIoConnection(room.id);
+    this._connectedClients.push(this.userService.getUser());
+    this.onSendNotification(Action.JOINED);
   }
 
   ngOnDestroy() {
