@@ -51,7 +51,7 @@ export class ChatComponent implements OnInit, OnDestroy
   }
 
   protected onSendMessage(message: string): void {
-    if (!message) {
+    if (!message || message.length <= 1) {
       return;
     }
 
