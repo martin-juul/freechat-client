@@ -71,11 +71,6 @@ export class ChatComponent implements OnInit, OnDestroy
   private onInitIoConnection(channelId: string): void {
     this.socketService.initSocket(channelId);
 
-    /*this._subscription.add(this.socketService.onMessage()
-      .subscribe((message: Message) => {
-        this._messages.push(message);
-      }));*/
-
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
         this._messages.push(message);
@@ -96,8 +91,7 @@ export class ChatComponent implements OnInit, OnDestroy
   private sendNotification(action: Action) {
     this._subscription.add(this.socketService.send({
       from: this.userService.user,
-      action: action,
-      //time: new Date()
+      action: action
     }));
   }
 

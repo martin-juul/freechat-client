@@ -86,7 +86,6 @@ mat-card {
   margin-left: 5%;
   color: #ccc;
   @include respond-to(xs) {
-   //flex-direction: column;
     margin-left: unset;
     margin-top: 10px;
     justify-content: center;
