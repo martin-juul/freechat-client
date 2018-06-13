@@ -21,15 +21,12 @@ export class SocketService
 
   public initSocket(roomId: string): void {
 
-    //if (roomId) {
+      if (this.socket) {
+        this.disconnect();
+      }
       this.socket = socketIo(this.socketServer + '/' + roomId);
       console.log(this.socket);
-      //this.connectedRooms.push({id: roomId});
-    //}
-    //else {
-      //this.socket = socketIo(this.socketServer);
-      //this.connectedRoom = '/';
-    //}
+
   }
 
   public send(message: Message): void {

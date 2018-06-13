@@ -72,11 +72,11 @@ export class NavigationComponent implements OnInit
       return;
     } else if (room === this.currentChatRoom) {
       return;
+    } else {
+      this.currentChatRoom = room;
+      this.chatRoomService.setRoom(room);
+      return;
     }
-
-    this.currentChatRoom = room;
-    this.chatRoomService.setRoom(room);
-    return;
 
   }
 
