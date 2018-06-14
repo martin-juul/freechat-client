@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import * as socketIo from 'socket.io-client';
+import { connect } from 'socket.io-client';
 import { ChatRoom } from '../models/chat-room.model';
 import { Event } from '../models/messaging/event.model';
 import { Message } from '../models/messaging/message.model';
@@ -13,7 +13,7 @@ import { Message } from '../models/messaging/message.model';
 export class SocketService
 {
   //public connectedRooms: ChatRoom[] = [];
-  private socket;
+  private socket: SocketIOClient.Socket;
   private socketServer = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
@@ -21,13 +21,23 @@ export class SocketService
 
   public initSocket(roomId: string): void {
 
-      if (this.socket) {
-        this.disconnect();
-      }
-      this.socket = socketIo(this.socketServer + '/' + roomId);
-      console.log(this.socket);
+    if (this.socket) {
+      this.socket.close();
+      this.socket.removeAllListeners();
+    }
+    this.socket = connect(this.socketServer + '/' + roomId);
 
   }
+
+  // public onHistory(): Observable<Message[]> {
+  //   return new Observable<Message[]>(observer => {
+  //     this.socket.on('get-history', (data: Message[]) => observer.next(data));
+  //   });
+  // }
+  //
+  // public getHistory(): void {
+  //   this.socket.emit('get-history');
+  // }
 
   public send(message: Message): void {
     this.socket.emit('message', message);
