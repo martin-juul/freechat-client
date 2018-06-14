@@ -24,6 +24,7 @@
     font-weight: bold;
     font-size: 1.3rem;
     display: inline-block;
+    //noinspection CssInvalidPropertyValue
     vertical-align: -webkit-baseline-middle;
   }
 }
@@ -118,6 +119,7 @@
   }
   .chat-message-input {
     margin: 0 auto;
+    padding-top: 2%;
     width: 90%;
     height: 100%;
   }
