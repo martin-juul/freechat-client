@@ -3,7 +3,7 @@
     <span>{{ channel?.label }}</span>
   </div>
 
-  <div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <div class="chat-container" #scrollMe [scrollTop]="_messages.length === 0 ? 0 : scrollMe.scrollHeight">
 
     <mat-list *ngFor="let message of _messages" class="chat-messages">
       <mat-list-item class="chat-box">
@@ -29,7 +29,7 @@
           <span> <b>{{message?.content.previousUsername}}</b> is now <b>{{message?.content.username}}</b> </span>
         </p>
       </mat-list-item>
-      <mat-divider></mat-divider>
+      <!--<mat-divider></mat-divider>-->
     </mat-list>
 
   </div>

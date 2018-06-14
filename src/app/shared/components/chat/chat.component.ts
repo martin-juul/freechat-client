@@ -50,6 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy
     this._subscription.unsubscribe();
   }
 
+
   protected onSendMessage(message: string): void {
     if (!message || message.length <= 1) {
       return;
@@ -87,7 +88,6 @@ export class ChatComponent implements OnInit, OnDestroy
       });
 
   }
-
   private sendNotification(action: Action) {
     this._subscription.add(this.socketService.send({
       from: this.userService.user,
