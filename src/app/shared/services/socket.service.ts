@@ -21,11 +21,14 @@ export class SocketService
 
   public initSocket(roomId: string): void {
 
-    if (this.socket) {
+    /*if (this.socket) {
       this.socket.close();
       this.socket.removeAllListeners();
-    }
-    this.socket = connect(this.socketServer + '/' + roomId);
+    }*/
+    this.socket = connect(this.socketServer + '/' + roomId, {
+      reconnectionDelay: 500,
+      reconnectionDelayMax: 700
+    });
 
   }
 
