@@ -15,7 +15,7 @@ export class ChatRoomService
     return this.subject.asObservable();
   }
 
-  clearRoom(room: ChatRoom) {
+  clearRoom() {
     this.subject.next();
   }
 }

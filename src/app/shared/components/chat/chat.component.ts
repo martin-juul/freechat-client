@@ -33,16 +33,18 @@ export class ChatComponent implements OnInit, OnDestroy
     this._subscription = this.chatRoomService.getRoom()
       .subscribe(async (room: ChatRoom) => {
         this.channel = await room;
-        this.connectChat(room);
+        this.connectChat(this.channel);
       });
 
   }
 
   connectChat(room: ChatRoom) {
-    this._messages = [];
-    this.onInitIoConnection(room.id);
-    this._connectedClients.push(this.userService.getUser());
-    this.onSendNotification(Action.JOINED);
+    if (room.id) {
+      this._messages = [];
+      this.onInitIoConnection(room.id);
+      this._connectedClients.push(this.userService.getUser());
+      this.onSendNotification(Action.JOINED);
+    }
   }
 
   ngOnDestroy() {
