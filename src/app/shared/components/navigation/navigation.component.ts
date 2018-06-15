@@ -69,6 +69,7 @@ export class NavigationComponent implements OnInit
     if (!this.currentChatRoom) {
       this.currentChatRoom = room;
       this.chatRoomService.setRoom(room);
+      this.router.navigateByUrl('/chat');
       return;
     } else if (room === this.currentChatRoom) {
       return;

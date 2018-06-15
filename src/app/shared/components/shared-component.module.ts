@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularMaterialModule } from '../modules/angular-material.module';
 import { ParseUrl } from '../pipes/parse-url.pipe';
-import { ChatRoomService } from '../services/chat-room.service';
 import { ChatComponent } from './chat/chat.component';
 
 import { NavigationComponent } from './navigation/navigation.component';
@@ -23,19 +22,23 @@ const COMPONENTS = [
   ChatComponent
 ];
 
+const PIPES = [
+  ParseUrl
+];
+
 @NgModule({
   imports: [
     ...BASE_MODULES,
   ],
   declarations: [
     ...COMPONENTS,
-    ParseUrl
+    ...PIPES
   ],
   exports: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ...PIPES
   ],
   providers: [
-    ChatRoomService
   ]
 })
 export class SharedComponentModule

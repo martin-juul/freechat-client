@@ -29,7 +29,7 @@ import { ElectronService } from './providers/electron.service';
 import { TitleService } from './providers/title.service';
 import { SharedComponentModule } from './shared/components/shared-component.module';
 import { AngularMaterialModule } from './shared/modules/angular-material.module';
-import { ParseUrl } from './shared/pipes/parse-url.pipe';
+import { ChatRoomService } from './shared/services/chat-room.service';
 import { LoginService } from './shared/services/login.service';
 import { SocketService } from './shared/services/socket.service';
 import { UserService } from './shared/services/user.service';
@@ -77,7 +77,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     AuthGuard,
     LoginService,
-    TitleService
+    TitleService,
+    ChatRoomService
   ],
   bootstrap: [ AppComponent ],
   schemas: [

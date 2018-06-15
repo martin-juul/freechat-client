@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TitleService } from '../../../providers/title.service';
 import { ChatRoom } from '../../models/chat-room.model';
@@ -15,8 +15,10 @@ import { UserService } from '../../services/user.service';
   templateUrl: './chat.component.html',
   styleUrls: [ './chat.component.scss' ]
 })
-export class ChatComponent implements OnInit, OnDestroy
+export class ChatComponent implements OnInit, OnDestroy, OnChanges
 {
+  @Input('chatRoom') chatRoom: ChatRoom;
+
   channel: ChatRoom;
   ioConnection: any;
   protected _action = Action;
@@ -32,14 +34,30 @@ export class ChatComponent implements OnInit, OnDestroy
   }
 
   ngOnInit() {
-    this._subscription = this.chatRoomService.getRoom()
-      .subscribe(async (room: ChatRoom) => {
-        this.channel = await room;
 
-        this.connectChat(this.channel);
-        this.titleService.setTitle(this.channel.label);
-      });
+    //this._subscription = this.chatRoomService.getRoom()
+      //.subscribe(async (room: ChatRoom) => {
+        //this.channel = await room;
+        // this.channel = this.chatRoom;
+        // this._subscription = new Subscription();
+        //
+        // this.connectChat(this.channel);
+        // this.titleService.setTitle(this.channel.label);
+      //});
 
+    this.initChat();
+
+  }
+
+  ngOnChanges() {
+    this.initChat();
+  }
+
+  initChat() {
+    this.channel = this.chatRoom;
+    this._subscription = new Subscription();
+    this.connectChat(this.chatRoom);
+    this.titleService.setTitle(this.channel.label);
   }
 
   connectChat(room: ChatRoom) {
