@@ -22,8 +22,7 @@ export class SocketService
   public initSocket(roomId: string): void {
 
     if (this.socket) {
-      this.socket.close();
-      this.socket.removeAllListeners();
+      this.disconnect();
     }
     this.socket = connect(this.socketServer + '/' + roomId, {
       reconnectionDelay: 500,
@@ -72,11 +71,8 @@ export class SocketService
     }));
   }
 
-  public disconnect(roomId?: string) {
-    if (roomId) {
-      //this.socket.close(roomId);
-    } else {
-      this.socket.close();
-    }
+  public disconnect() {
+    this.socket.close();
+    this.socket.removeAllListeners();
   }
 }
