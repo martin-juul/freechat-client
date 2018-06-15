@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { TitleService } from '../../../providers/title.service';
 import { ChatRoom } from '../../models/chat-room.model';
 import { Action } from '../../models/messaging/action.model';
 import { Event } from '../../models/messaging/event.model';
@@ -26,14 +27,17 @@ export class ChatComponent implements OnInit, OnDestroy
 
   constructor(private socketService: SocketService,
               private userService: UserService,
-              private chatRoomService: ChatRoomService) {
+              private chatRoomService: ChatRoomService,
+              private titleService: TitleService) {
   }
 
   ngOnInit() {
     this._subscription = this.chatRoomService.getRoom()
       .subscribe(async (room: ChatRoom) => {
         this.channel = await room;
+
         this.connectChat(this.channel);
+        this.titleService.setTitle(this.channel.label);
       });
 
   }
