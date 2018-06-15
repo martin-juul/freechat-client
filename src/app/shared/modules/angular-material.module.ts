@@ -12,7 +12,9 @@ import {
   MatListModule,
   MatMenuModule,
   MatPaginatorModule,
-  MatSelectModule, MatSidenavModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 
@@ -32,6 +34,7 @@ const MODULES = [
   MatDividerModule,
   MatPaginatorModule,
   MatSidenavModule,
+  MatTableModule,
 ];
 
 @NgModule({

@@ -1,3 +1,13 @@
-<div style="color: red; background: magenta; width: 1000px; height: 1000px;">
-  <span style="font-size: 40px">test</span>
+<div class="container">
+
+  <mat-list>
+    <h3 mat-subheader>Channels</h3>
+    <mat-list-item *ngFor="let channel of channels">
+      <h4 mat-line>{{ channel.label }}</h4>
+      <p mat-line>Created {{ channel.createdAt | date }}</p>
+      <p mat-line>Updated {{ channel.updatedAt | date }}</p>
+    </mat-list-item>
+  </mat-list>
+
+
 </div>

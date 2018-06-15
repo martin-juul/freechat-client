@@ -1,0 +1,18 @@
+//noinspection CssUnknownTarget
+@import '~scss/mixins';
+//noinspection CssUnknownTarget
+@import '~scss/theming';
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+mat-list {
+  background-color: #333333;
+  padding: 12px;
+  mat-list-item {
+    background-color: #1f1f1f;
+  }
+}

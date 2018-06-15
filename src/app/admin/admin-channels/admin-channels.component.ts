@@ -16,7 +16,9 @@ export class AdminChannelsComponent implements OnInit
 
   ngOnInit() {
     this.adminService.getChannels()
-      .then((rooms: ChatRoom[]) => this.channels.push(...rooms))
+      .then((rooms: ChatRoom[]) => {
+        this.channels.push(...rooms);
+      })
       .catch(err => console.error(err));
   }
 
