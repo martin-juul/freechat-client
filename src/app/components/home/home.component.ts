@@ -17,92 +17,12 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class HomeComponent implements OnInit, OnDestroy
 {
-  currentChannel: ChatRoom;
-
-
-
-  action = Action;
-  user: User;
-  messages: Message[] = [];
-  messageContent: string;
-  ioConnection: any;
-  connectedClients: User[] = [];
-
-  subscription: Subscription;
-
-  constructor(private socketService: SocketService,
-              private loginService: LoginService,
-              private userService: UserService) {
+  constructor() {
   }
 
   ngOnInit() {
-    //this.initIoConnection();
-
-    this.user = this.userService.getUser();
-    //this.connectedClients.push(this.user);
-    //this.sendNotification(Action.JOINED);
-
-    //console.log(this.user);
   }
 
   ngOnDestroy() {
-    //this.connectedClients = [];
   }
-
-  public sendMessage(message: string): void {
-    if (!message) {
-      return;
-    }
-
-    this.socketService.send({
-      from: this.user,
-      content: message,
-      time: new Date()
-    });
-
-    this.messageContent = null;
-  }
-
-  public sendNotification(action: Action, params?: any): void {
-    let message: Message;
-
-    if (action === Action.JOINED) {
-      message = {
-        from: this.user,
-        action: action,
-        time: new Date()
-      };
-    } else if (action === Action.RENAME) {
-      message = {
-        action: action,
-        content: {
-          username: this.user.username,
-          previousUsername: params.previousUsername,
-          time: new Date()
-        }
-      };
-    }
-
-    this.socketService.send(message);
-  }
-
-  private initIoConnection(): void {
-    this.socketService.initSocket('ba172393-0a4a-43ef-a465-4c2906c1c3ff');
-
-    this.ioConnection = this.socketService.onMessage()
-      .subscribe((message: Message) => {
-        this.messages.push(message);
-      });
-
-    this.socketService.onEvent(Event.CONNECT)
-      .subscribe(() => {
-        console.log('connected');
-      });
-
-    this.socketService.onEvent(Event.DISCONNECT)
-      .subscribe(() => {
-        console.log('disconnected');
-      });
-  }
-
 }
