@@ -32,10 +32,8 @@ export class SigninComponent implements OnInit {
     this.loginService.login(form.username, form.password)
       .subscribe((res) => {
         const user: User = (<User>res.body);
-        console.log(res);
-        console.log(user);
         this.authService.authenticate(user);
-        this.router.navigateByUrl('/')
+        this.router.navigateByUrl('/chat')
           .then(() => {
           console.log('Login successful!');
         }).catch((err) => {

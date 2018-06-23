@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { connect } from 'socket.io-client';
 import { ChatRoom } from '../models/chat-room.model';
 import { Event } from '../models/messaging/event.model';
 import { Message } from '../models/messaging/message.model';
+import { User } from '../models/user.model';
+import { UserService } from './user.service';
 
 //import { environment } from '../../environments/environment';
 
@@ -15,8 +17,20 @@ export class SocketService
   //public connectedRooms: ChatRoom[] = [];
   private socket: SocketIOClient.Socket;
   private socketServer = 'http://localhost:8080';
+  private _user: User;
 
-  constructor(private http: HttpClient) {
+  private _connectedClients = new Subject<ConnectedClient[]>();
+
+  constructor(private http: HttpClient,
+              private userService: UserService) {
+    this._user = this.userService.getUser();
+  }
+
+  public connectSocketServer(): void {
+    this.socket = connect(this.socketServer + '/', {
+      reconnectionDelay: 500,
+      reconnectionDelayMax: 700
+    });
   }
 
   public initSocket(roomId: string): void {
@@ -29,17 +43,25 @@ export class SocketService
       reconnectionDelayMax: 700
     });
 
+    this.socket.emit('client-connected', {
+      uid: this._user.id,
+      username: this._user.username,
+      avatar: this._user.avatar
+    });
+
+    if (this.socket.connected) {
+      this.onConnectedClients();
+    }
   }
 
-  // public onHistory(): Observable<Message[]> {
-  //   return new Observable<Message[]>(observer => {
-  //     this.socket.on('get-history', (data: Message[]) => observer.next(data));
-  //   });
-  // }
-  //
-  // public getHistory(): void {
-  //   this.socket.emit('get-history');
-  // }
+  public getClients() {
+    return this._connectedClients.asObservable();
+  }
+
+  public onConnectedClients() {
+    this.socket.on('connected-clients', (clients: ConnectedClient[]) => this._connectedClients.next(clients));
+    console.log(this._connectedClients);
+  }
 
   public send(message: Message): void {
     this.socket.emit('message', message);
@@ -72,7 +94,16 @@ export class SocketService
   }
 
   public disconnect() {
-    this.socket.close();
-    this.socket.removeAllListeners();
+    if (this.socket) {
+      this.socket.close();
+      this.socket.removeAllListeners();
+    }
   }
+}
+
+export interface ConnectedClient
+{
+  uid: string,
+  username: string,
+  avatar: string
 }

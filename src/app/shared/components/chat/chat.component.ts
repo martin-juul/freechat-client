@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges
 
   channel: ChatRoom;
   ioConnection: any;
+  isConnected = false;
   protected _action = Action;
   protected _messages: Message[] = [];
   protected _connectedClients: User[] = [];
@@ -45,7 +46,9 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges
         // this.titleService.setTitle(this.channel.label);
       //});
 
-    this.initChat();
+    if (this.chatRoom.id) {
+      this.initChat();
+    }
 
   }
 
@@ -104,11 +107,13 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges
     this.socketService.onEvent(Event.CONNECT)
       .subscribe(() => {
         console.log('connected');
+        this.isConnected = true;
       });
 
     this.socketService.onEvent(Event.DISCONNECT)
       .subscribe(() => {
         console.log('disconnected');
+        this.isConnected = false;
       });
 
   }

@@ -1,5 +1,7 @@
 <div class="container">
 
-  <app-chat class="main-content" *ngIf="currentChannel" [chatRoom]="currentChannel"></app-chat>
+  <ng-container *ngIf="currentChannel?.id">
+    <app-chat class="main-content" [chatRoom]="currentChannel"></app-chat>
+  </ng-container>
 
 </div>

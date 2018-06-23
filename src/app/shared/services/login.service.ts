@@ -11,7 +11,7 @@ export class LoginService
   }
 
   public signUp(username: string, email: string, password: string) {
-    return this.http.post<User>(LOGIN_SERVER + 'user/signup', {
+    return this.http.post<User>(LOGIN_SERVER + 'auth/signup', {
       username: username,
       password: password,
       email: email
@@ -19,20 +19,20 @@ export class LoginService
   }
 
   public login(username: string, password: string) {
-    return this.http.post<User>(LOGIN_SERVER + 'user/signin', {
+    return this.http.post<User>(LOGIN_SERVER + 'auth/signin', {
       username: username,
       password: password
     }, { observe: 'response' });
   }
 
   public verifyToken(userId: string, token: string) {
-    return this.http.post<User>(LOGIN_SERVER + 'user/verify-token', {
+    return this.http.post<User>(LOGIN_SERVER + 'auth/verify-token', {
       token: token
     }, { observe: 'response' });
   }
 
   public logOut(userId: string, token: string) {
-    return this.http.post(LOGIN_SERVER + 'user/logout', {
+    return this.http.post(LOGIN_SERVER + 'auth/logout', {
       userId: userId,
       token: token
     }, { observe: 'response' });

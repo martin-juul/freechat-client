@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChatRoom } from '../../shared/models/chat-room.model';
 import { ChatRoomService } from '../../shared/services/chat-room.service';
-import { SocketService } from '../../shared/services/socket.service';
+import { ConnectedClient, SocketService } from '../../shared/services/socket.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -12,8 +12,8 @@ import { SocketService } from '../../shared/services/socket.service';
 })
 export class ChatWindowComponent implements OnInit, OnDestroy
 {
-  private _subscription: Subscription;
   protected currentChannel: ChatRoom;
+  private _subscription: Subscription;
 
   constructor(private router: Router,
               private chatRoomService: ChatRoomService,
@@ -24,16 +24,33 @@ export class ChatWindowComponent implements OnInit, OnDestroy
     this._subscription =
       this.chatRoomService
         .getRoom()
-        .subscribe((room: ChatRoom) => {
-          this.currentChannel = room;
-          if (!this.currentChannel) {
-            this.router.navigateByUrl('/')
+        .subscribe(async(room: ChatRoom) => {
+          this.currentChannel = await room;
+          if (!await room) {
+            this.router.navigateByUrl('/');
           }
         });
+
+    console.log('chat-window initializing');
+
+    if (this.currentChannel) {
+      this.listenConnectedClients();
+    }
+
+  }
+
+  listenConnectedClients() {
+    this._subscription.add(
+      this.socketService.getClients()
+        .subscribe((clients: ConnectedClient[]) => {
+          console.log(clients);
+        })
+    );
   }
 
   ngOnDestroy() {
     this.socketService.disconnect();
+    this._subscription.unsubscribe();
   }
 
 }
