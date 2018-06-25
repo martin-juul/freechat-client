@@ -1,3 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-streams {
+  justify-content: center;
+  margin-bottom: 10%;
+}
+
 video {
   min-width: 720px;
 }

@@ -1,16 +1,21 @@
+<div class="container">
 
-<div>
-  <p>My id - {{ clientId }}</p>
-  <p>Audio allowed: {{allowAudio}}</p>
-  <p>Video allowed: {{allowVideo}}</p>
+  <div class="video-streams">
+    <video #videochat></video>
+  </div>
 
-  <button (click)="toggleAllowAudio()">Toggle Audio</button>
-  <button (click)="toggleAllowVideo()">Toggle Video</button>
+  <div>
+    <p>My id - {{ clientId }}</p>
+    <p>Audio allowed: {{allowAudio}}</p>
+    <p>Video allowed: {{allowVideo}}</p>
 
-  <input type="text" [(ngModel)]="recieverId">
+    <button (click)="toggleAllowAudio()">Toggle Audio</button>
+    <button (click)="toggleAllowVideo()">Toggle Video</button>
 
-  <button (click)="connect()">Connect</button>
-  <button (click)="videoConnect()">VideoChat</button>
+    <input type="text" [(ngModel)]="recieverId">
+
+    <button (click)="connect()">Connect</button>
+    <button (click)="videoConnect()">VideoChat</button>
+  </div>
+
 </div>
-
-<video #videochat></video>

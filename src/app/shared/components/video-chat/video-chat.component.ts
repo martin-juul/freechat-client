@@ -13,7 +13,7 @@ export class VideoChatComponent implements OnInit, OnDestroy
 {
   @ViewChild('videochat') videoPlayer: any;
   private _subscription: Subscription;
-  private _remoteStreams = [];
+  private _objectUrls: string[] = [];
   peer;
   recieverId: any;
   clientId: any;
@@ -83,8 +83,10 @@ export class VideoChatComponent implements OnInit, OnDestroy
 
       const call = this.peer.call(this.recieverId, stream);
       call.on('stream', (remoteStream: MediaStream) => {
+        const objectUrl = URL.createObjectURL(remoteStream);
+        this._objectUrls.push(objectUrl);
 
-        video.src = URL.createObjectURL(remoteStream);
+        video.src = objectUrl;
         video.play();
       });
     }, function (err) {
@@ -94,7 +96,12 @@ export class VideoChatComponent implements OnInit, OnDestroy
   }
 
   ngOnDestroy() {
-    this.peer.disconnect();
+    //URL.revokeObjectURL(this._remoteStream);
+
+    this._objectUrls.forEach(url => {
+      URL.revokeObjectURL(url);
+    });
+    this.peer.destroy();
   }
 
 }
