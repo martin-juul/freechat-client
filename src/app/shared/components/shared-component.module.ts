@@ -9,6 +9,7 @@ import { ChatComponent } from './chat/chat.component';
 
 import { NavigationComponent } from './navigation/navigation.component';
 import { VideoChatComponent } from './video-chat/video-chat.component';
+import { VideoChatService } from './video-chat/video-chat.service';
 
 const BASE_MODULES = [
   CommonModule,
@@ -28,6 +29,10 @@ const PIPES = [
   ParseUrl
 ];
 
+const PROVIDERS = [
+  VideoChatService
+];
+
 @NgModule({
   imports: [
     ...BASE_MODULES,
@@ -41,6 +46,7 @@ const PIPES = [
     ...PIPES
   ],
   providers: [
+    ...PROVIDERS
   ]
 })
 export class SharedComponentModule
@@ -48,7 +54,7 @@ export class SharedComponentModule
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: SharedComponentModule,
-      providers: []
+      providers: [...PROVIDERS]
     };
   }
 }

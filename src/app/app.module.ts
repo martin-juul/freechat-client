@@ -26,7 +26,6 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { WebviewDirective } from './directives/webview.directive';
 
 import { ElectronService } from './providers/electron.service';
-import { PeerService } from './providers/peer.service';
 import { TitleService } from './providers/title.service';
 import { SharedComponentModule } from './shared/components/shared-component.module';
 import { AngularMaterialModule } from './shared/modules/angular-material.module';

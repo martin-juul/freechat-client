@@ -23,14 +23,12 @@ export class ChatWindowComponent implements OnInit, OnDestroy
   }
 
   ngOnInit() {
-    console.log('chat-window initializing');
-
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       if (params['type'] === 'friend') {
         this.socketService.disconnect();
         this.isGroupChat = false;
       } else {
+        this.isGroupChat = true;
         this.initGroupChat();
       }
     });

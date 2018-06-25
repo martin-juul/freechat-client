@@ -1,5 +1,9 @@
 <div class="container">
 
+  <ng-container *ngIf="!isGroupChat">
+    <app-video-chat></app-video-chat>
+  </ng-container>
+
   <ng-container *ngIf="currentChannel?.id">
     <app-chat class="main-content" [chatRoom]="currentChannel"></app-chat>
   </ng-container>
