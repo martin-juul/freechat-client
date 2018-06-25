@@ -8,6 +8,7 @@ import { ParseUrl } from '../pipes/parse-url.pipe';
 import { ChatComponent } from './chat/chat.component';
 
 import { NavigationComponent } from './navigation/navigation.component';
+import { VideoChatComponent } from './video-chat/video-chat.component';
 
 const BASE_MODULES = [
   CommonModule,
@@ -19,7 +20,8 @@ const BASE_MODULES = [
 
 const COMPONENTS = [
   NavigationComponent,
-  ChatComponent
+  ChatComponent,
+  VideoChatComponent,
 ];
 
 const PIPES = [
@@ -32,7 +34,7 @@ const PIPES = [
   ],
   declarations: [
     ...COMPONENTS,
-    ...PIPES
+    ...PIPES,
   ],
   exports: [
     ...COMPONENTS,

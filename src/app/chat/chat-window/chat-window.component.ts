@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChatRoom } from '../../shared/models/chat-room.model';
 import { ChatRoomService } from '../../shared/services/chat-room.service';
@@ -14,13 +14,30 @@ export class ChatWindowComponent implements OnInit, OnDestroy
 {
   protected currentChannel: ChatRoom;
   private _subscription: Subscription;
+  isGroupChat = true;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private chatRoomService: ChatRoomService,
               private socketService: SocketService) {
   }
 
   ngOnInit() {
+    console.log('chat-window initializing');
+
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+      if (params['type'] === 'friend') {
+        this.socketService.disconnect();
+        this.isGroupChat = false;
+      } else {
+        this.initGroupChat();
+      }
+    });
+
+  }
+
+  initGroupChat() {
     this._subscription =
       this.chatRoomService
         .getRoom()
@@ -31,12 +48,9 @@ export class ChatWindowComponent implements OnInit, OnDestroy
           }
         });
 
-    console.log('chat-window initializing');
-
     if (this.currentChannel) {
       this.listenConnectedClients();
     }
-
   }
 
   listenConnectedClients() {
@@ -50,7 +64,9 @@ export class ChatWindowComponent implements OnInit, OnDestroy
 
   ngOnDestroy() {
     this.socketService.disconnect();
-    this._subscription.unsubscribe();
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
   }
 
 }

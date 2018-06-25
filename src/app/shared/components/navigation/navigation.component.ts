@@ -20,27 +20,15 @@ export class NavigationComponent implements OnInit
   rooms: ChatRoom[] = [];
   currentChatRoom: ChatRoom;
 
-  /*public navItems = [
-    {
-      label: 'Channels',
-      goTo: '/channels',
-      subMenu: [
-        { label: 'General', goTo: '/channels/general' },
-        { label: 'Code', goTo: '/channels/general' },
-        { label: 'Games', goTo: '/channels/general' },
-      ],
-    },
-    {
+
+  friendList =    {
       label: 'Friends',
       goTo: '/friends',
       subMenu: [
-        { label: 'Grand Master', icon: 'https://via.placeholder.com/100x100', goTo: '/friends/grand-master' },
-        { label: 'Egon Olsen', icon: 'https://via.placeholder.com/100x100', goTo: '/friends/egon-olsen' },
-        { label: 'Børge Mogensen', icon: 'https://via.placeholder.com/100x100', goTo: '/friends/borge-mogensen' },
-        { label: 'Cooper', icon: 'https://via.placeholder.com/100x100', goTo: '/friends/cooper' },
+        { label: 'Snowy', icon: 'https://via.placeholder.com/100x100', goTo: '/chat', navType: 'friend', },
+        { label: 'Egon', icon: 'https://via.placeholder.com/100x100', goTo: '/chat', navType: 'friend' },
       ]
-    },
-  ];*/
+    };
 
   public navItems = [];
 
@@ -60,6 +48,8 @@ export class NavigationComponent implements OnInit
           label: 'Channels',
           subMenu: [ ...this.rooms ]
         });
+
+        this.navItems.push(this.friendList);
 
       })
       .catch(err => console.error(err));

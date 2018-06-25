@@ -17,6 +17,13 @@
               class="sub-menu-item-label"
               matLine
               (click)="changeChannel(entry)">{{entry.label}}</a>
+
+            <a
+              *ngIf="entry?.navType === 'friend' "
+              class="sub-menu-item-label"
+              matLine
+              [routerLink]="entry.goTo"
+              [queryParams]="{type: 'friend'}">{{entry.label}}</a>
           </mat-list-item>
         </mat-nav-list>
 
